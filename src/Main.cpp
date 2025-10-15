@@ -1,6 +1,7 @@
 ﻿#include "includes.h"
 #include "./futures/Esp.h"
 #include "./futures/Misc.h"
+#include "evo_inc.hpp"
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -26,6 +27,9 @@ void InitImGui()
     io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
     ImGui_ImplWin32_Init(window);
     ImGui_ImplDX11_Init(pDevice, pContext);
+    
+    // Initialize evo menu system fonts
+    evo::_render->initialize_imgui(window, pDevice);
 }
 
 void Cleanup()
@@ -60,6 +64,13 @@ void Cleanup()
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    // Update mouse position for evo input system
+    if (uMsg == WM_MOUSEMOVE)
+        evo::_input->set_mouse_position(evo::vec2_t(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)));
+    
+    if (uMsg == WM_MOUSEWHEEL)
+        evo::_input->set_mouse_wheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
+    
     if (init && ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
         return true;
 
@@ -97,40 +108,28 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
         g_ShowMenu = !g_ShowMenu;
     }
 
+    // Update input for evo menu system
+    evo::_input->init_input();
+    
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    if (g_ShowMenu) {
-        // Menu default Size
-        ImGui::SetNextWindowSize(ImVec2(500, 600), ImGuiCond_FirstUseEver);
+    // Initialize container
+    evo::_container->initialize_container();
+    
+    // Initialize the new evo menu
+    evo::_menu->init();
+    
+    // Begin external drawing
+    evo::externals::_ext_b->begin();
+    
+    // Popup drawing
+    evo::externals::_ext_b_p->begin_popup();
 
-        // Menu Name
-        ImGui::Begin("Devox");
-
-        if (ImGui::BeginTabBar("MainTabs"))
-        {
-            if (ImGui::BeginTabItem("ESP"))
-            {
-                esp.drawSettings();
-                ImGui::EndTabItem();
-            }
-
-            if (ImGui::BeginTabItem("Aimbot"))
-            {
-                //aimbot.drawSettings();
-                ImGui::EndTabItem();
-            }
-
-            ImGui::EndTabBar();
-        }
-
-
-
-        ImGui::End();
-    }
-
+    // Still draw ESP
     esp.drawESP();
+    
     ImGui::Render();
     pContext->OMSetRenderTargets(1, &mainRenderTargetView, NULL);
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());

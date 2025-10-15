@@ -146,6 +146,24 @@
     <ClCompile Include="src\Lolz\minhook\src\trampoline.c" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MemoryHandler\Math.cpp" />
+    <ClCompile Include="src\evo-sdk\animation_system\animation_system.cpp" />
+    <ClCompile Include="src\evo-sdk\render\render_system.cpp" />
+    <ClCompile Include="src\ui\container\container.cpp" />
+    <ClCompile Include="src\ui\controls\button\button.cpp" />
+    <ClCompile Include="src\ui\controls\checkbox\checkbox.cpp" />
+    <ClCompile Include="src\ui\controls\child\child.cpp" />
+    <ClCompile Include="src\ui\controls\colorpicker\colorpicker.cpp" />
+    <ClCompile Include="src\ui\controls\combo\combo.cpp" />
+    <ClCompile Include="src\ui\controls\esp_preview\esp_preview.cpp" />
+    <ClCompile Include="src\ui\controls\keybind\keybind.cpp" />
+    <ClCompile Include="src\ui\controls\listbox\listbox.cpp" />
+    <ClCompile Include="src\ui\controls\multicombo\multicombo.cpp" />
+    <ClCompile Include="src\ui\controls\popup\popup.cpp" />
+    <ClCompile Include="src\ui\controls\slider\slider.cpp" />
+    <ClCompile Include="src\ui\controls\text\text.cpp" />
+    <ClCompile Include="src\ui\controls\textinput\textinput.cpp" />
+    <ClCompile Include="src\ui\controls\window\window.cpp" />
+    <ClCompile Include="src\ui\menu\menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\Lolz\minhook\dll_resources\MinHook.def" />
@@ -175,6 +193,28 @@
     <ClInclude Include="src\Lolz\minhook\src\trampoline.h" />
     <ClInclude Include="src\MemoryHandler\Math.h" />
     <ClInclude Include="src\MemoryHandler\Offsets.h" />
+    <ClInclude Include="src\evo_inc.hpp" />
+    <ClInclude Include="src\evo-sdk\animation_system\animation_system.hpp" />
+    <ClInclude Include="src\evo-sdk\input_system\input_system.hpp" />
+    <ClInclude Include="src\evo-sdk\render\fonts.hpp" />
+    <ClInclude Include="src\evo-sdk\render\render_system.hpp" />
+    <ClInclude Include="src\evo-sdk\sdk\sdk.hpp" />
+    <ClInclude Include="src\ui\container\container.hpp" />
+    <ClInclude Include="src\ui\controls\button\button.hpp" />
+    <ClInclude Include="src\ui\controls\checkbox\checkbox.hpp" />
+    <ClInclude Include="src\ui\controls\child\child.hpp" />
+    <ClInclude Include="src\ui\controls\colorpicker\colorpicker.hpp" />
+    <ClInclude Include="src\ui\controls\combo\combo.hpp" />
+    <ClInclude Include="src\ui\controls\esp_preview\esp_preview.hpp" />
+    <ClInclude Include="src\ui\controls\keybind\keybind.hpp" />
+    <ClInclude Include="src\ui\controls\listbox\listbox.hpp" />
+    <ClInclude Include="src\ui\controls\multicombo\multicombo.hpp" />
+    <ClInclude Include="src\ui\controls\popup\popup.hpp" />
+    <ClInclude Include="src\ui\controls\slider\slider.hpp" />
+    <ClInclude Include="src\ui\controls\text\text.hpp" />
+    <ClInclude Include="src\ui\controls\textinput\textinput.hpp" />
+    <ClInclude Include="src\ui\controls\window\window.hpp" />
+    <ClInclude Include="src\ui\menu\menu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
