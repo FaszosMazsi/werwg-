@@ -28,9 +28,8 @@ void InitImGui()
     ImGui_ImplWin32_Init(window);
     ImGui_ImplDX11_Init(pDevice, pContext);
     
-    // Initialize evo menu system
+    // Initialize evo menu system fonts
     evo::_render->initialize_imgui(window, pDevice);
-    evo::_container->initialize_container();
 }
 
 void Cleanup()
